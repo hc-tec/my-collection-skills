@@ -13,6 +13,8 @@ docker compose up -d cookiecloud
 
 CookieCloud will listen on `http://127.0.0.1:8088`.
 
+The included `docker-compose.yml` mounts CookieCloud data to `./.cookiecloud-data/` (gitignored).
+
 ## Configure Browser Extension
 
 In the CookieCloud browser extension settings:
@@ -53,6 +55,12 @@ docker run --rm \
   <image> --help
 ```
 
+If you use this repo’s `docker-compose.yml`, the services run in the same Docker network.
+Inside containers, CookieCloud is reachable at:
+- `http://cookiecloud:8088`
+
+The `runner` / `media-audio-download` services set `COOKIECLOUD_SERVER_URL=http://cookiecloud:8088` automatically.
+
 ## Optional: Export Cookies to an Env File
 
 The router skill includes a helper to export per-platform cookie env vars:
@@ -60,4 +68,3 @@ The router skill includes a helper to export per-platform cookie env vars:
 uv run skills/favorites-harvester/scripts/cookiecloud_export_env.py \
   http://127.0.0.1:8088 YOUR_UUID YOUR_PASSWORD --env-file favorites.env
 ```
-

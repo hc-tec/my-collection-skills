@@ -1,0 +1,5 @@
+FROM mcr.microsoft.com/playwright/python:v1.41.0-jammy
+
+RUN pip install --no-cache-dir requests pycryptodome playwright==1.41.0
+
+WORKDIR /work

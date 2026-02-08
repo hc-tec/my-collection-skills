@@ -18,23 +18,19 @@ Principles:
   - `skills/zhihu-favorites`
   - `skills/xiaohongshu-favorites`
 - Router/aggregator:
-  - `skills/favorites-harvester` (one entrypoint calling per-platform scripts via `uv run`)
+  - `skills/favorites-harvester` (one entrypoint calling per-platform scripts)
 - Optional media pipeline (Docker-first):
   - `skills/media-audio-download` (download audio for STT)
   - `skills/whisper-transcribe-docker` (local transcription via faster-whisper)
 
-## Quick Start (CookieCloud Recommended)
+## Quick Start (Docker, CookieCloud Recommended)
 
 1) Start CookieCloud server (Docker):
 ```bash
 docker compose up -d cookiecloud
 ```
 
-2) In your browser CookieCloud extension:
-- Server: `http://127.0.0.1:8088`
-- UUID/PASSWORD: your own values
-
-3) Export env vars (choose one):
+2) Set env vars (host -> passed into containers):
 
 PowerShell:
 ```powershell
@@ -48,9 +44,18 @@ export COOKIECLOUD_UUID="YOUR_UUID"
 export COOKIECLOUD_PASSWORD="YOUR_PASSWORD"
 ```
 
-4) List favorites across platforms:
+3) In your browser CookieCloud extension:
+- Server: `http://127.0.0.1:8088`
+- UUID/PASSWORD: your own values
+
+4) Build the runner image (Playwright + Python deps):
 ```bash
-uv run skills/favorites-harvester/scripts/favorites_harvester.py list --platform all --json
+docker compose build runner
+```
+
+5) List favorites across platforms:
+```bash
+docker compose run --rm runner python skills/favorites-harvester/scripts/favorites_harvester.py list --platform all --json
 ```
 
 Docs:

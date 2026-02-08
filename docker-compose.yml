@@ -3,5 +3,53 @@ services:
     image: easychen/cookiecloud:latest
     ports:
       - "8088:8088"
+    volumes:
+      - ./.cookiecloud-data:/data/api/data
     restart: unless-stopped
 
+  runner:
+    build:
+      context: .
+      dockerfile: Dockerfile.runner
+    working_dir: /work
+    volumes:
+      - .:/work
+    environment:
+      - COOKIECLOUD_SERVER_URL=http://cookiecloud:8088
+      - COOKIECLOUD_UUID=${COOKIECLOUD_UUID}
+      - COOKIECLOUD_PASSWORD=${COOKIECLOUD_PASSWORD}
+      - COOKIECLOUDUUID=${COOKIECLOUDUUID}
+      - COOKIECLOUDPASSWORD=${COOKIECLOUDPASSWORD}
+    depends_on:
+      - cookiecloud
+
+  media-audio-download:
+    build:
+      context: ./skills/media-audio-download
+      dockerfile: Dockerfile
+    working_dir: /out
+    volumes:
+      - ./out:/out
+    environment:
+      - COOKIECLOUD_SERVER_URL=http://cookiecloud:8088
+      - COOKIECLOUD_UUID=${COOKIECLOUD_UUID}
+      - COOKIECLOUD_PASSWORD=${COOKIECLOUD_PASSWORD}
+      - COOKIECLOUDUUID=${COOKIECLOUDUUID}
+      - COOKIECLOUDPASSWORD=${COOKIECLOUDPASSWORD}
+    depends_on:
+      - cookiecloud
+
+  whisper-transcribe:
+    build:
+      context: ./skills/whisper-transcribe-docker
+      dockerfile: Dockerfile
+    working_dir: /work
+    volumes:
+      - .:/work
+      - whisper-models:/models
+    environment:
+      # Avoid passing an empty HF_ENDPOINT (breaks huggingface_hub URL parsing).
+      - HF_ENDPOINT=${HF_ENDPOINT:-https://huggingface.co}
+
+volumes:
+  whisper-models:

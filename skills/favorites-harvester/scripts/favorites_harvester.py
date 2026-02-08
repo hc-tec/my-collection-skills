@@ -5,8 +5,11 @@
 """
 Multi-platform favorites harvester (router).
 
-This script is intentionally thin: it calls the atomic per-platform scripts via `uv run`
-and prints either human-readable text or JSON.
+This script is intentionally thin: it calls the atomic per-platform scripts via:
+- `uv run` when `uv` is available, otherwise
+- `python` (direct execution; suitable for Docker runner images that pre-install deps)
+
+It prints either human-readable text or JSON.
 
 Supported platforms:
 - bilibili (favorites folders + items + video transcript via subtitles)
@@ -35,11 +38,20 @@ def _repo_skills_dir() -> Path:
     return Path(__file__).resolve().parents[2]
 
 
-def _require_uv() -> str:
+@dataclass(frozen=True)
+class Runner:
+    argv: list[str]
+    label: str
+
+
+def _resolve_runner() -> Runner:
     uv = shutil.which("uv")
-    if not uv:
-        raise SystemExit("Missing `uv` on PATH. Install uv first: https://github.com/astral-sh/uv")
-    return uv
+    if uv:
+        return Runner(argv=[uv, "run"], label="uv run")
+    py = shutil.which("python3") or shutil.which("python")
+    if py:
+        return Runner(argv=[py], label="python")
+    raise SystemExit("Missing `uv` or `python` on PATH.")
 
 
 @dataclass(frozen=True)
@@ -50,9 +62,9 @@ class RunResult:
 
 
 def run_uv_script(script_path: Path, args: list[str]) -> RunResult:
-    uv = _require_uv()
+    runner = _resolve_runner()
     proc = subprocess.run(
-        [uv, "run", str(script_path), *args],
+        [*runner.argv, str(script_path), *args],
         capture_output=True,
         text=True,
         encoding="utf-8",
@@ -65,7 +77,8 @@ def run_uv_json(script_path: Path, args: list[str]) -> Any:
     res = run_uv_script(script_path, args)
     if res.code != 0:
         msg = res.stderr.strip() or res.stdout.strip() or f"exit {res.code}"
-        raise SystemExit(f"Failed: uv run {script_path.name} ({msg})")
+        runner = _resolve_runner()
+        raise SystemExit(f"Failed: {runner.label} {script_path.name} ({msg})")
     try:
         return json.loads(res.stdout)
     except Exception as e:

@@ -7,6 +7,9 @@ description: Multi-platform favorites/bookmarks router that calls atomic skills 
 
 Use this skill when you need one entrypoint across platforms. It calls the per-platform skills (no RSSHub).
 
+Docker-first:
+- See `docs/usage.md` for `docker compose run --rm runner ...` examples (no host Python required).
+
 Cookie auth (shared)
 - Recommended: CookieCloud env vars (`COOKIECLOUD_UUID`, `COOKIECLOUD_PASSWORD`, optional `COOKIECLOUD_SERVER_URL`). Compatibility: also accepts `COOKIECLOUDUUID` / `COOKIECLOUDPASSWORD`.
 - Or set platform-specific cookie env vars (`BILIBILI_COOKIE`, `ZHIHU_COOKIES`, `XIAOHONGSHU_COOKIE`)
@@ -47,7 +50,7 @@ JSON mode:
 
 ## How It Works
 
-- Calls these atomic skills via `uv run`:
+- Calls these atomic skills by invoking their scripts (prefers `uv run` if available; falls back to `python`):
   - `skills/bilibili-favorites`
   - `skills/zhihu-favorites`
   - `skills/xiaohongshu-favorites`

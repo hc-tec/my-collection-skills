@@ -23,3 +23,5 @@ venv/
 Thumbs.db
 .vscode/
 
+# CookieCloud server local data (contains encrypted cookie payloads)
+.cookiecloud-data/
