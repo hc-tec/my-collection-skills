@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+  <defs>
+    <style>
+      .ui { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Noto Sans", "Liberation Sans", sans-serif; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+      .title { font-size: 24px; font-weight: 700; fill: #111827; }
+      .sub { font-size: 14px; fill: #6b7280; }
+      .label { font-size: 14px; fill: #374151; font-weight: 600; }
+      .value { font-size: 14px; fill: #111827; }
+      .hint { font-size: 12px; fill: #6b7280; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="960" height="540" fill="#f8fafc"/>
+
+  <!-- Header -->
+  <text x="56" y="72" class="ui title">CookieCloud 扩展配置（示意图，脱敏）</text>
+  <text x="56" y="98" class="ui sub">用于把浏览器已登录站点的 cookies 加密同步到本地 CookieCloud 服务端，供脚本/Docker 容器使用。</text>
+
+  <!-- Card -->
+  <rect x="56" y="132" rx="16" ry="16" width="848" height="340" fill="#ffffff" stroke="#e5e7eb"/>
+
+  <!-- Fake extension title bar -->
+  <rect x="56" y="132" rx="16" ry="16" width="848" height="54" fill="#111827"/>
+  <text x="84" y="166" class="ui" font-size="16" fill="#ffffff" font-weight="700">CookieCloud</text>
+  <text x="210" y="166" class="ui" font-size="12" fill="#d1d5db">Settings</text>
+
+  <!-- Fields -->
+  <text x="84" y="220" class="ui label">Server</text>
+  <rect x="84" y="232" width="792" height="44" rx="10" ry="10" fill="#f9fafb" stroke="#e5e7eb"/>
+  <text x="104" y="260" class="mono value">http://127.0.0.1:8088</text>
+
+  <text x="84" y="310" class="ui label">UUID</text>
+  <rect x="84" y="322" width="792" height="44" rx="10" ry="10" fill="#f9fafb" stroke="#e5e7eb"/>
+  <text x="104" y="350" class="mono value">&lt;YOUR_UUID&gt;</text>
+
+  <text x="84" y="400" class="ui label">PASSWORD</text>
+  <rect x="84" y="412" width="560" height="44" rx="10" ry="10" fill="#f9fafb" stroke="#e5e7eb"/>
+  <text x="104" y="440" class="mono value">&lt;YOUR_PASSWORD&gt;</text>
+
+  <!-- Button -->
+  <rect x="664" y="412" width="212" height="44" rx="10" ry="10" fill="#2563eb"/>
+  <text x="770" y="440" class="ui" font-size="14" fill="#ffffff" font-weight="700" text-anchor="middle">Sync / Upload</text>
+
+  <!-- Hint -->
+  <text x="84" y="498" class="ui hint">
+    提示：配置后点击 Sync/Upload，把 bilibili.com / zhihu.com / xiaohongshu.com 的 cookies 同步到服务端。
+  </text>
+</svg>
+

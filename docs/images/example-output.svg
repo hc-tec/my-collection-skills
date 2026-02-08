@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+  <defs>
+    <style>
+      .ui { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Noto Sans", "Liberation Sans", sans-serif; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+      .title { font-size: 24px; font-weight: 700; fill: #111827; }
+      .sub { font-size: 14px; fill: #6b7280; }
+      .term { fill: #e5e7eb; font-size: 13px; }
+      .cmd { fill: #93c5fd; }
+      .ok { fill: #86efac; }
+      .dim { fill: #9ca3af; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="960" height="540" fill="#f8fafc"/>
+  <text x="56" y="72" class="ui title">示例输出（脱敏示意图）</text>
+  <text x="56" y="98" class="ui sub">下面展示用 Docker runner 拉取三平台收藏容器列表的 JSON 输出结构（字段会随平台变化，以下为示意）。</text>
+
+  <!-- Terminal window -->
+  <rect x="56" y="132" width="848" height="360" rx="14" ry="14" fill="#0b1220" stroke="#111827"/>
+  <rect x="56" y="132" width="848" height="44" rx="14" ry="14" fill="#111827"/>
+  <circle cx="84" cy="154" r="6" fill="#ef4444"/>
+  <circle cx="104" cy="154" r="6" fill="#f59e0b"/>
+  <circle cx="124" cy="154" r="6" fill="#10b981"/>
+  <text x="150" y="160" class="ui" font-size="12" fill="#d1d5db">runner (python) • favorites_harvester.py list --json</text>
+
+  <!-- Content -->
+  <text x="84" y="204" class="mono term">
+    <tspan class="dim">$</tspan>
+    <tspan class="cmd"> docker compose run --rm runner python skills/favorites-harvester/scripts/favorites_harvester.py list --platform all --limit 5 --json</tspan>
+  </text>
+
+  <text x="84" y="232" class="mono term">{</text>
+  <text x="84" y="252" class="mono term">  "bilibili": {</text>
+  <text x="84" y="272" class="mono term">    "uid": &lt;your_uid&gt;,</text>
+  <text x="84" y="292" class="mono term">    "created": [ { "id": 123, "title": "默认收藏夹", "media_count": 42 }, ... ],</text>
+  <text x="84" y="312" class="mono term">    "collected": [ ... ]</text>
+  <text x="84" y="332" class="mono term">  },</text>
+  <text x="84" y="352" class="mono term">  "zhihu": {</text>
+  <text x="84" y="372" class="mono term">    "user": "your_url_token",</text>
+  <text x="84" y="392" class="mono term">    "collections": [ { "id": 456, "title": "我的收藏夹", "item_count": 20 }, ... ]</text>
+  <text x="84" y="412" class="mono term">  },</text>
+  <text x="84" y="432" class="mono term">  "xiaohongshu": {</text>
+  <text x="84" y="452" class="mono term">    "profile_id": "your_profile_id",</text>
+  <text x="84" y="472" class="mono term">    "notes": [ { "note_id": "...", "title": "...", "url": "..." }, ... ],</text>
+  <text x="84" y="492" class="mono term">    "boards": [ { "board_id": "...", "name": "...", "url": "..." }, ... ]</text>
+  <text x="84" y="512" class="mono term">  }</text>
+  <text x="84" y="532" class="mono term">}</text>
+</svg>
+

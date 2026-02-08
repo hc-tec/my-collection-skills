@@ -4,6 +4,16 @@ These skills authenticate via your existing browser login cookies.
 
 Recommended approach: **CookieCloud** (browser extension + a small local server).
 
+## Links
+
+- CookieCloud (GitHub): https://github.com/easychen/CookieCloud
+- Docker image: `easychen/cookiecloud`
+- Browser extension: search `CookieCloud` in your browser’s extension store (Chrome / Edge)
+
+Config screenshot (sanitized mock):
+
+![CookieCloud extension settings](images/cookiecloud-extension-settings.svg)
+
 ## Start CookieCloud Server (Docker)
 
 From repo root:
@@ -22,6 +32,14 @@ In the CookieCloud browser extension settings:
 - UUID / PASSWORD: set your own values
 
 Then trigger a sync/export so the server has an encrypted cookie payload.
+
+## Verify CookieCloud Has Data
+
+After you click Sync/Upload in the extension, the server should return JSON that contains an `encrypted` field:
+
+```bash
+curl 'http://127.0.0.1:8088/get/<YOUR_UUID>'
+```
 
 ## Provide Credentials to Scripts
 
