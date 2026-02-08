@@ -17,23 +17,23 @@ Cookie auth (recommended)
 
 Probe login / current user:
 ```bash
-uv run {baseDir}/scripts/zhihu_me.py
+docker compose run --rm runner python skills/zhihu-favorites/scripts/zhihu_me.py
 ```
 
 List collections (favorites folders):
 ```bash
-uv run {baseDir}/scripts/zhihu_collections.py --limit 50
+docker compose run --rm runner python skills/zhihu-favorites/scripts/zhihu_collections.py --limit 50
 ```
 
 List items inside a collection:
 ```bash
-uv run {baseDir}/scripts/zhihu_collection_items.py --collection-id <id> --limit 50
+docker compose run --rm runner python skills/zhihu-favorites/scripts/zhihu_collection_items.py --collection-id <id> --limit 50
 ```
 
 Fetch full content for an answer/article (plain text output by default):
 ```bash
-uv run {baseDir}/scripts/zhihu_item_content.py --url 'https://www.zhihu.com/question/.../answer/...'
-uv run {baseDir}/scripts/zhihu_item_content.py --url 'https://zhuanlan.zhihu.com/p/...'
+docker compose run --rm runner python skills/zhihu-favorites/scripts/zhihu_item_content.py --url 'https://www.zhihu.com/question/.../answer/...'
+docker compose run --rm runner python skills/zhihu-favorites/scripts/zhihu_item_content.py --url 'https://zhuanlan.zhihu.com/p/...'
 ```
 
 JSON mode (for piping / automation):
@@ -42,11 +42,11 @@ JSON mode (for piping / automation):
 ## How To Answer Common Requests
 
 - "帮我看看知乎的收藏夹"
-  - Run `zhihu_collections.py --json --limit 50` and show `id/title/item_count` so the user can pick a collection.
+  - Run `docker compose run --rm runner python skills/zhihu-favorites/scripts/zhihu_collections.py --json --limit 50` and show `id/title/item_count` so the user can pick a collection.
 - "我最近收藏了哪些回答/文章？"
-  - Pick a collection and run `zhihu_collection_items.py --collection-id ... --limit 20` (items come in API order).
+  - Pick a collection and run `docker compose run --rm runner python skills/zhihu-favorites/scripts/zhihu_collection_items.py --collection-id <id> --limit 20` (items come in API order).
 - "这篇回答/文章讲了什么？"
-  - Run `zhihu_item_content.py --url ...` and summarize from the extracted plain text.
+  - Run `docker compose run --rm runner python skills/zhihu-favorites/scripts/zhihu_item_content.py --url ...` and summarize from the extracted plain text.
 
 ## Troubleshooting
 

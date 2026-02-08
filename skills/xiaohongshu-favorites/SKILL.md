@@ -17,33 +17,33 @@ Cookie auth (recommended)
 
 Detect current profile id (best-effort):
 ```bash
-uv run {baseDir}/scripts/xhs_whoami.py
+docker compose run --rm runner python skills/xiaohongshu-favorites/scripts/xhs_whoami.py
 ```
 
 List saved notes (收藏):
 ```bash
-uv run {baseDir}/scripts/xhs_saved_notes.py --max 50
-uv run {baseDir}/scripts/xhs_saved_notes.py --profile-id <profileId> --max 50
+docker compose run --rm runner python skills/xiaohongshu-favorites/scripts/xhs_saved_notes.py --max 50
+docker compose run --rm runner python skills/xiaohongshu-favorites/scripts/xhs_saved_notes.py --profile-id <profileId> --max 50
 ```
 
 List saved boards (收藏专辑/收藏夹):
 ```bash
-uv run {baseDir}/scripts/xhs_boards.py --max 50
-uv run {baseDir}/scripts/xhs_boards.py --profile-id <profileId> --max 50
+docker compose run --rm runner python skills/xiaohongshu-favorites/scripts/xhs_boards.py --max 50
+docker compose run --rm runner python skills/xiaohongshu-favorites/scripts/xhs_boards.py --profile-id <profileId> --max 50
 ```
 
 List notes inside a board (note ids + xsec_token for detail fetch):
 ```bash
-uv run {baseDir}/scripts/xhs_board_items.py --board-id <boardId> --max 50
+docker compose run --rm runner python skills/xiaohongshu-favorites/scripts/xhs_board_items.py --board-id <boardId> --max 50
 ```
 
 Fetch note details (plain text output by default):
 ```bash
-uv run {baseDir}/scripts/xhs_note_detail.py --url 'https://www.xiaohongshu.com/explore/<noteId>'
+docker compose run --rm runner python skills/xiaohongshu-favorites/scripts/xhs_note_detail.py --url 'https://www.xiaohongshu.com/explore/<noteId>'
 
 # Some notes require an xsec_token (share token) to browse via web.
 # You can avoid shell-escaping `&` by passing it separately:
-uv run {baseDir}/scripts/xhs_note_detail.py --note-id <noteId> --xsec-token <xsec_token>
+docker compose run --rm runner python skills/xiaohongshu-favorites/scripts/xhs_note_detail.py --note-id <noteId> --xsec-token <xsec_token>
 ```
 
 JSON mode (for piping / automation):

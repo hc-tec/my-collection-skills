@@ -16,33 +16,34 @@ Cookie auth (shared)
 
 Optional: export CookieCloud -> env file (no RSSHub)
 ```bash
-uv run {baseDir}/scripts/cookiecloud_export_env.py http://127.0.0.1:8088 <uuid> <password> --env-file favorites.env
+docker compose run --rm runner python skills/favorites-harvester/scripts/cookiecloud_export_env.py \
+  http://cookiecloud:8088 <uuid> <password> --env-file favorites.env
 ```
 
 ## Quick Start
 
 List favorites across platforms:
 ```bash
-uv run {baseDir}/scripts/favorites_harvester.py list --platform all
+docker compose run --rm runner python skills/favorites-harvester/scripts/favorites_harvester.py list --platform all
 ```
 
 List only XiaoHongShu saved boards (收藏专辑/收藏夹):
 ```bash
-uv run {baseDir}/scripts/favorites_harvester.py list --platform xiaohongshu --xhs-mode boards
+docker compose run --rm runner python skills/favorites-harvester/scripts/favorites_harvester.py list --platform xiaohongshu --xhs-mode boards
 ```
 
 Fetch content by URL (auto-detect platform):
 ```bash
-uv run {baseDir}/scripts/favorites_harvester.py content --url 'https://www.bilibili.com/video/BV...'
-uv run {baseDir}/scripts/favorites_harvester.py content --url 'https://www.zhihu.com/question/.../answer/...'
-uv run {baseDir}/scripts/favorites_harvester.py content --url 'https://www.xiaohongshu.com/explore/<noteId>'
+docker compose run --rm runner python skills/favorites-harvester/scripts/favorites_harvester.py content --url 'https://www.bilibili.com/video/BV...'
+docker compose run --rm runner python skills/favorites-harvester/scripts/favorites_harvester.py content --url 'https://www.zhihu.com/question/.../answer/...'
+docker compose run --rm runner python skills/favorites-harvester/scripts/favorites_harvester.py content --url 'https://www.xiaohongshu.com/explore/<noteId>'
 ```
 
 List items in a container:
 ```bash
-uv run {baseDir}/scripts/favorites_harvester.py items --platform bilibili --folder-id <mediaId> --limit 50
-uv run {baseDir}/scripts/favorites_harvester.py items --platform zhihu --collection-id <id> --limit 50
-uv run {baseDir}/scripts/favorites_harvester.py items --platform xiaohongshu --board-id <boardId> --limit 50
+docker compose run --rm runner python skills/favorites-harvester/scripts/favorites_harvester.py items --platform bilibili --folder-id <mediaId> --limit 50
+docker compose run --rm runner python skills/favorites-harvester/scripts/favorites_harvester.py items --platform zhihu --collection-id <id> --limit 50
+docker compose run --rm runner python skills/favorites-harvester/scripts/favorites_harvester.py items --platform xiaohongshu --board-id <boardId> --limit 50
 ```
 
 JSON mode:

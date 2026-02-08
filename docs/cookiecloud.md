@@ -65,6 +65,6 @@ The `runner` / `media-audio-download` services set `COOKIECLOUD_SERVER_URL=http:
 
 The router skill includes a helper to export per-platform cookie env vars:
 ```bash
-uv run skills/favorites-harvester/scripts/cookiecloud_export_env.py \
-  http://127.0.0.1:8088 YOUR_UUID YOUR_PASSWORD --env-file favorites.env
+docker compose run --rm runner python skills/favorites-harvester/scripts/cookiecloud_export_env.py \
+  http://cookiecloud:8088 YOUR_UUID YOUR_PASSWORD --env-file favorites.env
 ```
