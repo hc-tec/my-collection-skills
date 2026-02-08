@@ -1,0 +1,25 @@
+.env
+*.env
+
+# Local outputs
+out/
+outputs/
+favorites.env
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# uv / venv
+.venv/
+venv/
+.uv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+
