@@ -1,6 +1,6 @@
-# Moltbot Favorites Skills (Bilibili / Zhihu / XiaoHongShu)
+# My Collection Skills (Bilibili / Zhihu / XiaoHongShu)
 
-This repo contains a small set of **Codex skills** + scripts for exporting/inspecting your own favorites:
+This repo contains a small set of modular **skills** + scripts for exporting/inspecting your own favorites:
 
 - **Bilibili**: favorites folders + folder items + **subtitle transcript** (when available)
 - **Zhihu**: collections + items + full answer/article text extraction
